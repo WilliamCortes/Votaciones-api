@@ -7,8 +7,8 @@ const host = '0.0.0.0';
 
 
 conn.sync({
-    force: true
-    // force: false
+    // force: true
+    force: false
 }).then(() => {
     app.listen(port_number, host, () => {
         console.log(`Servidor corriendo en el puerto ${port_number}`)

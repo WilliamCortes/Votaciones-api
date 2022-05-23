@@ -7,7 +7,7 @@ router.get('/', getAllUsers);
 
 router.post('/', createNewUser);
 
-router.get('/email', getUserByEmail);
+router.get('/:email', getUserByEmail);
 
 router.post('/:userId/table/:tableId', addTableToUser);
 

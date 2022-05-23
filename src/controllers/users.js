@@ -9,16 +9,17 @@ const getAllUsers = (req, res, next) => {
 };
 
 const createNewUser = (req, res, next) => {
-    const { name, email, password } = req.body;
-    User.create({ name, email, password })
+    const { name, email, password,isAdmin,tableId, haveTables } = req.body;
+    User.create({ name, email, password, isAdmin, tableId, haveTables })
         .then(createdUser => res.json(createdUser))
         .catch(error => next(error));
 };
 
 const getUserByEmail = (req, res, next) => {
-    const { email } = req.body;
-    return User.findByPk(email, { include: Table, })
-        .then(user => res.json(user))
+    const { email } = req.params;
+    return User.findByPk(email)
+    .then(user => {
+            res.json(user)})
         .catch(error => next(error));
 };
 
@@ -29,11 +30,11 @@ const addTableToUser = async (req, res, next) => {
         if (table.UserId) {
             let userId = table.UserId;
             let currentUser = await User.findByPk(userId);
-            return res.send(`Este libro está prestado a: ${currentUser.name}`);
+            return res.send(`Esta mesa está asignada a: ${currentUser.name}`);
         }
         let user = await User.findByPk(userId, {});
-        let result = await user.addBook(table);
-        res.send(`Prestamo exitoso a: ${result.name}`);
+        let result = await user.addTable(table);
+        res.send(`Asignación exitosa: ${result.name}`);
     } catch (error) {
         next(error);
     }
