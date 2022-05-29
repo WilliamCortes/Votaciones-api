@@ -22,6 +22,10 @@ module.exports = sequelize => (
             type: DataTypes.STRING,
             allowNull: false,
         },
+        votesPetro: {
+            type: DataTypes.REAL,
+            allowNull: false,
+        },
         votes: {
             type: DataTypes.REAL,
             allowNull: false,

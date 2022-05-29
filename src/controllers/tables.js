@@ -17,6 +17,7 @@ const addTables = async (req, res, next) => {
     const { tables, admin } = req.params;
     const table = {
         votes: 0,
+        votesPetro:0,
         img: "",
         name: '',
         email: '',
@@ -46,10 +47,10 @@ const addNameandEmail = async (req, res, next) => {
 }
 
 const addData = async (req, res, next) => {
-    const {votes, image: img, id} = req.body
+    const {votes, votesPetro, image: img, id} = req.body
     const table = await Table.findByPk(id)
     console.log('response-addData: ',table, 'id: ',id)
-    table.update({ votes, img }, {})
+    table.update({ votes, votesPetro, img }, {})
     .then(table => res.json(table))
     .catch(error => next(error) )
 }
